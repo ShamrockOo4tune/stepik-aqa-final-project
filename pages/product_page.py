@@ -7,16 +7,12 @@ class ProductPage(BasePage):
     def add_to_basket(self):
         add_to_basket_button = self.browser.find_element(*ProductPageLocators.ADD_TO_CART_BUTTON)
         add_to_basket_button.click()
-        #self.product_added_with_correct_product_name()
-        #self.product_price_match_basket_total()
-
-    def product_added_with_correct_product_name(self):
-        product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
+        
+    def product_added_with_correct_product_name(self, product_name):
         added_product_name = self.browser.find_element(*ProductPageLocators.HAS_BEEN_ADDED_TO_YOUR_BASKET).text
         assert product_name == added_product_name, "product name added to the basket doesn't match name on the product page"
     
-    def product_price_match_basket_total(self):
-        product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
+    def product_price_match_basket_total(self, product_price):
         basket_total = self.browser.find_element(*ProductPageLocators.BASKET_TOTAL).text
         assert product_price == basket_total, "product price doesn't match basket total value"
     
@@ -36,3 +32,11 @@ class ProductPage(BasePage):
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
+
+    def get_product_name(self):
+        product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
+        return product_name
+
+    def get_product_price(self):
+        product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
+        return product_price
