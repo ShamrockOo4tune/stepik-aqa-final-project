@@ -31,16 +31,3 @@ def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
     basket_page = BasketPage(browser=browser, url=browser.current_url)
     basket_page.shoud_not_be_goods_in_the_basket()
     basket_page.should_be_empty_basket_message()
-
-def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
-    # Гость открывает страницу товара
-    # Переходит в корзину по кнопке в шапке 
-    # Ожидаем, что в корзине нет товаров
-    # Ожидаем, что есть текст о том что корзина пуста
-    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
-    product_page = ProductPage(browser=browser, url=link)
-    product_page.open()
-    product_page.go_to_basket()
-    basket_page = BasketPage(browser=browser, url=browser.current_url)
-    basket_page.shoud_not_be_goods_in_the_basket()
-    basket_page.should_be_empty_basket_message()
